@@ -36,11 +36,11 @@ router.get('/:id', async (req, res) => {
 });
 
 
-//update route -  take a value {name, color or etc} and change somethings
+//put / edit / update route -  take a value {name, color or etc} and change somethings
 
 router.put('/:id', async (req, res) => {
     try {
-        const updateFruit = await Fruit.findByIdAndUpdate(req.params.id, req.params.body);
+        const updateFruit = await Fruit.findByIdAndUpdate(req.params.id, req.body);
         res.json(updateFruit)
     }
     catch (error) {
@@ -48,4 +48,14 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const deleteFruit = await Fruit.findByIdAndDelete(req.params.id);
+        res.json(deleteFruit)
+    }
+    catch (error) {
+        res.status(500).json({error: error.message}) 
+    }
+});
 module.exports = router;
